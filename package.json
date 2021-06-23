@@ -1,0 +1,34 @@
+{
+    "name": "resubstitute",
+    "version": "0.1.0",
+    "description": "Pub/Sub drop-in replacement for Microsoft/ReSub",
+    "types": "dist/ReSubstitute.d.ts",
+    "main": "dist/ReSubstitute.js",
+    "scripts": {
+        "build": "tsc",
+        "lint": "eslint \"src/**\"",
+        "prettier": "prettier -c **/*.ts",
+        "test": "jest",
+        "watch": "tsc -w"
+    },
+    "keywords": [
+        "ReSub",
+        "React",
+        "state",
+        "manager",
+        "TypeScript"
+    ],
+    "author": "Willem Liu",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/jest": "^26.0.23",
+        "@typescript-eslint/eslint-plugin": "^4.28.0",
+        "eslint": "^7.29.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^3.4.0",
+        "jest": "^27.0.5",
+        "prettier": "^2.3.1",
+        "ts-jest": "^27.0.3",
+        "typescript": "^4.3.4"
+    }
+}

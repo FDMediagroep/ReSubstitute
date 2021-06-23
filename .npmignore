@@ -1,0 +1,10 @@
+.eslintrc.json
+.gitignore
+.npmignore
+.prettierignore
+.prettierrc.json
+jest.config.js
+js-coverage
+src
+__tests__
+tsconfig.json
