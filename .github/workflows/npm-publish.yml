@@ -58,7 +58,7 @@ jobs:
         if: contains(github.ref, 'canary')
         run: npm publish ./dist --tag next
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
         continue-on-error: true
       - name: Use Node.js (GitHub) ${{ matrix.node-version }}
         uses: actions/setup-node@v2
