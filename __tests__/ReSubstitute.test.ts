@@ -126,6 +126,7 @@ describe('ReSubstitute', () => {
         expect(onKey2TriggerMock).toBeCalledTimes(0);
         expect(onKey3TriggerMock).toBeCalledTimes(0);
         resubThrottled.trigger();
+        resubThrottled.trigger();
         expect(onTriggerMock).toBeCalledTimes(0);
         expect(onKeyTriggerMock).toBeCalledTimes(0);
         expect(onKey2TriggerMock).toBeCalledTimes(0);
@@ -138,6 +139,7 @@ describe('ReSubstitute', () => {
         expect(onKey3TriggerMock).toBeCalledTimes(0);
 
         resubThrottled.trigger(['testKey', 'testKey2']);
+        resubThrottled.trigger(['testKey', 'testKey2']);
         expect(onTriggerMock).toBeCalledTimes(1);
         expect(onKeyTriggerMock).toBeCalledTimes(0);
         expect(onKey2TriggerMock).toBeCalledTimes(0);
@@ -148,5 +150,17 @@ describe('ReSubstitute', () => {
         expect(onKeyTriggerMock).toBeCalledTimes(1);
         expect(onKey2TriggerMock).toBeCalledTimes(1);
         expect(onKey3TriggerMock).toBeCalledTimes(0);
+
+        resubThrottled.trigger('testKey3');
+        expect(onTriggerMock).toBeCalledTimes(1);
+        expect(onKeyTriggerMock).toBeCalledTimes(1);
+        expect(onKey2TriggerMock).toBeCalledTimes(1);
+        expect(onKey3TriggerMock).toBeCalledTimes(0);
+
+        jest.advanceTimersByTime(1000);
+        expect(onTriggerMock).toBeCalledTimes(1);
+        expect(onKeyTriggerMock).toBeCalledTimes(1);
+        expect(onKey2TriggerMock).toBeCalledTimes(1);
+        expect(onKey3TriggerMock).toBeCalledTimes(1);
     });
 });

@@ -12,6 +12,7 @@
         "jest": true,
         "es6": true
     },
+    "ignorePatterns": ["*.test.*", "*.spec.*"],
     "rules": {
         "prettier/prettier": ["error"],
         "@typescript-eslint/array-type": "off",

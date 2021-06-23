@@ -1,6 +1,6 @@
 type KeyOrKeys = string | string[];
 
-type Callback = (keys: string[]) => void;
+type Callback = (keys: KeyOrKeys) => void;
 
 interface Subscription {
     id: number;
@@ -9,7 +9,7 @@ interface Subscription {
 }
 
 interface SubscriptionOptions {
-    keys: string[];
+    keys: KeyOrKeys;
     throttledUntil: number;
     bypassBlock: boolean;
 }
@@ -23,6 +23,7 @@ export class ReSubstitute {
     private subscriptions: Subscription[] = [];
     private static pendingCallbacks: Map<Callback, SubscriptionOptions> =
         new Map();
+    private static scheduledCallbacks: Map<Callback, number> = new Map();
     private throttleMs = 0;
     private bypassTriggerBlocks = false;
     static Key_All = 'SUBSCRIBE_TO_ALL';
@@ -39,16 +40,28 @@ export class ReSubstitute {
                 // The callback does not bypass the block so we continue to the next callback.
                 continue;
             } else if (options.bypassBlock) {
-                callback.call(null, options.keys);
+                callback(options.keys);
+                ReSubstitute.pendingCallbacks.delete(callback);
             } else if (+new Date() >= options.throttledUntil) {
-                callback.call(null, options.keys);
+                callback(options.keys);
+                ReSubstitute.pendingCallbacks.delete(callback);
             } else {
-                setTimeout(
-                    callback.bind(null, options.keys),
-                    +new Date() - options.throttledUntil
+                if (this.scheduledCallbacks.has(callback)) {
+                    const to = this.scheduledCallbacks.get(callback);
+                    if (to) {
+                        clearTimeout(to);
+                    }
+                    this.scheduledCallbacks.delete(callback);
+                }
+
+                this.scheduledCallbacks.set(
+                    callback,
+                    setTimeout(() => {
+                        callback(options.keys);
+                        ReSubstitute.pendingCallbacks.delete(callback);
+                    }, +new Date() - options.throttledUntil) as any
                 );
             }
-            ReSubstitute.pendingCallbacks.delete(callback);
         }
     }
 
@@ -75,7 +88,7 @@ export class ReSubstitute {
         ];
     }
 
-    protected _getSubscriptionKeys(): string[] {
+    protected _getSubscriptionKeys(): KeyOrKeys[] {
         return this.subscriptions.map((subscription) => {
             return subscription.key;
         });
@@ -89,6 +102,21 @@ export class ReSubstitute {
     }
 
     /**
+     * Set trigger when conditions are met.
+     * @param keys
+     * @param subscription
+     */
+    private setTrigger(keys: string[], subscription: Subscription) {
+        if (!ReSubstitute.pendingCallbacks.has(subscription.callback)) {
+            ReSubstitute.pendingCallbacks.set(subscription.callback, {
+                bypassBlock: this.bypassTriggerBlocks,
+                keys,
+                throttledUntil: +new Date() + this.throttleMs,
+            });
+        }
+    }
+
+    /**
      * Trigger callbacks of subscriptions.
      * @param keyOrKeys trigger callback if subscription matches given key or keys.
      */
@@ -96,31 +124,31 @@ export class ReSubstitute {
         if (typeof keyOrKeys === 'string') {
             this.subscriptions.forEach((subscription) => {
                 if (subscription.key === keyOrKeys) {
-                    ReSubstitute.pendingCallbacks.set(subscription.callback, {
-                        bypassBlock: this.bypassTriggerBlocks,
-                        keys: [ReSubstitute.Key_All, keyOrKeys],
-                        throttledUntil: +new Date() + this.throttleMs,
-                    });
+                    const keys = [ReSubstitute.Key_All];
+                    if (keys.indexOf(keyOrKeys) === -1) {
+                        keys.push(keyOrKeys);
+                    }
+                    this.setTrigger(keys, subscription);
                 }
             });
         } else if (Array.isArray(keyOrKeys)) {
             this.subscriptions.forEach((subscription) => {
                 if (keyOrKeys.indexOf(subscription.key) !== -1) {
-                    ReSubstitute.pendingCallbacks.set(subscription.callback, {
-                        bypassBlock: this.bypassTriggerBlocks,
-                        keys: [ReSubstitute.Key_All, ...keyOrKeys],
-                        throttledUntil: +new Date() + this.throttleMs,
-                    });
+                    this.setTrigger(
+                        [
+                            ReSubstitute.Key_All,
+                            ...keyOrKeys.filter(
+                                (key) => key !== ReSubstitute.Key_All
+                            ),
+                        ],
+                        subscription
+                    );
                 }
             });
         } else {
             // Notify all listeners
             this.subscriptions.forEach((subscription) => {
-                ReSubstitute.pendingCallbacks.set(subscription.callback, {
-                    bypassBlock: this.bypassTriggerBlocks,
-                    keys: keyOrKeys,
-                    throttledUntil: +new Date() + this.throttleMs,
-                });
+                this.setTrigger(keyOrKeys, subscription);
             });
         }
 
