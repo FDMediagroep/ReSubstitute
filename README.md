@@ -126,6 +126,6 @@ const resubThrottled = new ReSubstitute(500);
 resubThrottled.subscribe(() => {
     console.log('triggered');
 });
-resubThrottled.trigger(); // trigger canceled by future call
 resubThrottled.trigger(); // console.log('triggered'); after 500ms
+resubThrottled.trigger(); // trigger already scheduled so 2nd trigger not added
 ```

@@ -46,21 +46,16 @@ export class ReSubstitute {
                 callback(options.keys);
                 ReSubstitute.pendingCallbacks.delete(callback);
             } else {
-                if (this.scheduledCallbacks.has(callback)) {
-                    const to = this.scheduledCallbacks.get(callback);
-                    if (to) {
-                        clearTimeout(to);
-                    }
-                    this.scheduledCallbacks.delete(callback);
+                if (!ReSubstitute.scheduledCallbacks.has(callback)) {
+                    ReSubstitute.scheduledCallbacks.set(
+                        callback,
+                        setTimeout(() => {
+                            callback(options.keys);
+                            ReSubstitute.pendingCallbacks.delete(callback);
+                            ReSubstitute.scheduledCallbacks.delete(callback);
+                        }, +new Date() - options.throttledUntil) as any
+                    );
                 }
-
-                this.scheduledCallbacks.set(
-                    callback,
-                    setTimeout(() => {
-                        callback(options.keys);
-                        ReSubstitute.pendingCallbacks.delete(callback);
-                    }, +new Date() - options.throttledUntil) as any
-                );
             }
         }
     }
