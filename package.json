@@ -1,15 +1,17 @@
 {
-    "name": "resubstitute",
+    "name": "@fdmg/resubstitute",
     "version": "0.1.0",
     "description": "Pub/Sub drop-in replacement for Microsoft/ReSub",
-    "types": "dist/ReSubstitute.d.ts",
-    "main": "dist/ReSubstitute.js",
+    "types": "ReSubstitute.d.ts",
+    "main": "ReSubstitute.js",
     "scripts": {
-        "build": "tsc",
+        "build": "npm run webpack",
         "lint": "eslint \"src/**\"",
         "prettier": "prettier -c **/*.ts",
         "test": "jest",
-        "watch": "tsc -w"
+        "watch": "npm run webpack:dev -- --watch",
+        "webpack": "cross-env WEBPACK_BUNDLE_ANALYZER=true NODE_ENV=production webpack --mode=production",
+        "webpack:dev": "cross-env NODE_ENV=development webpack --mode=development"
     },
     "keywords": [
         "ReSub",
@@ -23,12 +25,18 @@
     "devDependencies": {
         "@types/jest": "^26.0.23",
         "@typescript-eslint/eslint-plugin": "^4.28.0",
+        "copy-webpack-plugin": "^9.0.0",
+        "cross-env": "^7.0.3",
         "eslint": "^7.29.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-prettier": "^3.4.0",
         "jest": "^27.0.5",
         "prettier": "^2.3.1",
         "ts-jest": "^27.0.3",
-        "typescript": "^4.3.4"
+        "ts-loader": "^9.2.3",
+        "typescript": "^4.3.4",
+        "webpack": "^5.40.0",
+        "webpack-bundle-analyzer": "^4.4.2",
+        "webpack-cli": "^4.7.2"
     }
 }
