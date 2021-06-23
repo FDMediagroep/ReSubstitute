@@ -10,6 +10,8 @@ React State manager drop-in replacement for Microsoft/ReSub
 
 ## Usage
 
+1. `npm i -D @fdmg/resubstitute`
+
 ### Creating Stores
 
 A `store` extends the `ReSubstitute` class. It is a class in which you can store whatever values you want.
