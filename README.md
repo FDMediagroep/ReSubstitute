@@ -56,6 +56,8 @@ ThemeStore.unsubscribe(subscriptionId);
 
 ### Trigger blocks
 
+Sometimes you may want to do lot of consecutive updates but you don't necessarily need to notify all subscribers for each of those updates. Then you can use the static function `ReSubstitute.pushTriggerBlock()` to push a block onto the stack. As long as there is a block on the stack, triggers will not cause subscribers to be notified.
+
 ```javascript
 const resub = new ReSubstitute();
 resub.subscribe(() => {
