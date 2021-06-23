@@ -1,9 +1,16 @@
 {
     "name": "@fdmg/resubstitute",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Pub/Sub drop-in replacement for Microsoft/ReSub",
     "types": "ReSubstitute.d.ts",
     "main": "ReSubstitute.js",
+    "publishConfig": {
+        "access": "public"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:FDMediagroep/ReSubstitute.git"
+    },
     "scripts": {
         "build": "npm run webpack",
         "lint": "eslint \"src/**\"",
