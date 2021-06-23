@@ -127,5 +127,5 @@ resubThrottled.subscribe(() => {
     console.log('triggered');
 });
 resubThrottled.trigger(); // console.log('triggered'); after 500ms
-resubThrottled.trigger(); // trigger already scheduled so 2nd trigger not added
+resubThrottled.trigger(); // trigger already scheduled so 2nd trigger is ignored
 ```
