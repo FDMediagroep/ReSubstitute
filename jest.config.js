@@ -1,15 +1,15 @@
-const { defaults } = require("jest-config");
+const { defaults } = require('jest-config');
 
 module.exports = {
     ...defaults,
-    preset: "ts-jest",
+    preset: 'ts-jest',
     collectCoverage: true,
-    coverageDirectory: "js-coverage",
-    coverageReporters: ["lcov", "text"],
+    coverageDirectory: 'js-coverage',
+    coverageReporters: ['lcov', 'text'],
     // globals: {
     //     'ts-jest': {
     //         tsconfig: 'tsconfig.test.json',
     //     },
     // },
-    testEnvironment: "jsdom",
+    testEnvironment: 'jsdom',
 };

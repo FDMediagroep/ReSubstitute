@@ -74,6 +74,9 @@ describe('ReSubstitute', () => {
         resub.trigger('testKey');
         expect(onTriggerMock).toBeCalledTimes(1);
         expect(onKeyTriggerMock).toBeCalledTimes(1);
+        resub.trigger(['testKey', ReSubstitute.Key_All]);
+        expect(onTriggerMock).toBeCalledTimes(2);
+        expect(onKeyTriggerMock).toBeCalledTimes(2);
     });
 
     test('should subscribe by multiple keys and be triggered correctly', () => {
