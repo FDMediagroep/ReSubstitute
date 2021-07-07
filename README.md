@@ -3,6 +3,7 @@
 [![CodeQL](https://github.com/FDMediagroep/ReSubstitute/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/FDMediagroep/ReSubstitute/actions/workflows/codeql-analysis.yml)
 [![Node.js Package](https://github.com/FDMediagroep/ReSubstitute/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/FDMediagroep/ReSubstitute/actions/workflows/npm-publish.yml)
 [![Bundle-size minified+gzip](https://img.shields.io/bundlephobia/minzip/@fdmg/resubstitute)](https://bundlephobia.com/result?p=@fdmg/resubstitute)
+[![NPM](https://img.shields.io/npm/v/@fdmg/resubstitute?color=blue)](https://npmjs.com/package/@fdmg%2Fresubstitute)
 
 # ReSubstitute
 
