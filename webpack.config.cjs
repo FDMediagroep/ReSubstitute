@@ -24,6 +24,7 @@ module.exports = {
         path: path.join(__dirname, '/dist'),
         filename: '[name].js',
         libraryTarget: 'module',
+        clean: true,
     },
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
