@@ -10,11 +10,8 @@ const devtool = NODE_ENV == '"development"' ? 'source-map' : undefined;
 
 module.exports = {
     devtool,
-    experiments: {
-        outputModule: true,
-    },
     optimization: {
-        minimize: true,
+        minimize: false,
     },
     entry: {
         // Global
@@ -23,7 +20,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, '/dist'),
         filename: '[name].js',
-        libraryTarget: 'module',
+        libraryTarget: 'commonjs2',
         clean: true,
     },
     resolve: {
