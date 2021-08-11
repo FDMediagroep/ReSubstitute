@@ -2,6 +2,7 @@
     "name": "@fdmg/resubstitute",
     "version": "0.1.3",
     "description": "Pub/Sub drop-in replacement for Microsoft/ReSub",
+    "type": "module",
     "types": "ReSubstitute.d.ts",
     "main": "ReSubstitute.js",
     "publishConfig": {
@@ -32,6 +33,7 @@
     "devDependencies": {
         "@types/jest": "^27.0.0",
         "@typescript-eslint/eslint-plugin": "^4.29.1",
+        "@typescript-eslint/parser": "^4.29.1",
         "copy-webpack-plugin": "^9.0.1",
         "cross-env": "^7.0.3",
         "eslint": "^7.32.0",

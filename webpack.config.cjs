@@ -20,7 +20,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, '/dist'),
         filename: '[name].js',
-        libraryTarget: 'commonjs2',
+        // libraryTarget: 'commonjs2',
     },
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
