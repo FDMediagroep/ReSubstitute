@@ -1,6 +1,6 @@
 {
     "name": "@fdmg/resubstitute",
-    "version": "0.1.12",
+    "version": "0.1.13",
     "description": "Pub/Sub drop-in replacement for Microsoft/ReSub",
     "types": "ReSubstitute.d.ts",
     "main": "ReSubstitute.js",
