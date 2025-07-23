@@ -36,7 +36,7 @@
         "copy-webpack-plugin": "^13.0.0",
         "cross-env": "^7.0.3",
         "eslint": "^9.31.0",
-        "eslint-config-prettier": "^10.1.5",
+        "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prettier": "^5.5.1",
         "jest": "^30.0.4",
         "jest-environment-jsdom": "^30.0.5",
