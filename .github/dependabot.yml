@@ -11,3 +11,5 @@ updates:
       interval: "weekly"
       day: "wednesday"
     versioning-strategy: increase
+    cooldown:
+      default-days: 3
