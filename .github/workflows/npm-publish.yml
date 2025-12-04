@@ -38,8 +38,11 @@ jobs:
       - name: Use Node.js (NPMJS) ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
+          node-version: ${{ matrix.node-version }}
           always-auth: true
           registry-url: https://registry.npmjs.org/
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
       - name: Update npm
         run: npm install -g npm@latest
       - name: Install dependencies
