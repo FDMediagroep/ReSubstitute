@@ -41,7 +41,7 @@
         "jest": "^30.4.2",
         "jest-environment-jsdom": "30.4.1",
         "prettier": "^3.9.5",
-        "ts-jest": "29.4.11",
+        "ts-jest": "29.4.12",
         "ts-loader": "^9.6.2",
         "typescript": "^5.9.3",
         "webpack": "^5.108.4",
